@@ -100,6 +100,9 @@ curacion = 50
 
 while True:
     option = input("Que quieres hacer atacar, curar o salir: ").lower()
+    if malo <= 0:
+        malo = 0
+        print("Ganaste")
     if option == "atacar":
         malo = malo - daño
         print(f"Atacaste al malo y quitaste {daño} de vida. Al malo le quedan {malo} vida")
@@ -109,3 +112,5 @@ while True:
     elif option == "salir":
         print("Slaiste del juego")
         break
+    else: 
+        print("Opcion no valida ")
