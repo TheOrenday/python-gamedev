@@ -1,16 +1,24 @@
 import random
+def check_guess(player, secret):
+    if player > secret:
+        return "MAS BAJO"
+    elif player < secret:
+        return "MAS ALTO"
+    else:
+        return "CORRECTO"
 number_computer = random.randint(1, 100)
 try_player = 7
 while try_player > 0:
     player = int(input("Inserta un numero del 1 al 100:"))
-    if player == number_computer:
+    resultado = check_guess(player, number_computer)
+    if resultado == "CORRECTO":
         print("Ganaste has encontrado el numero")
         break
-    elif player > number_computer:
+    elif resultado == "MAS BAJO":
         try_player = try_player - 1
         print("NUMERO MAs bajo")
         print(f"Te quedan {try_player} intentos")
-    elif player < number_computer:
+    elif resultado == "MAS ALTO":
         try_player = try_player - 1
         print("Numero mas alto")
         print(f"Te quedan {try_player} intentos")
