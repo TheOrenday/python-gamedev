@@ -52,4 +52,3 @@ while True:
     if hero["health"] <= 0:
         print("Perdiste")
         break
-

@@ -104,7 +104,7 @@ while True:
         print("Opcion no valida ")
 
 def is_alive(health):
-    return health >= 1
+    return health > 0
 
 health = 100
 print(f"Esta vivo: {is_alive(health)}")
