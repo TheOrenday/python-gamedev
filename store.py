@@ -11,16 +11,16 @@ def load_game():
                 inventory_list = inventory_text.split(", ")
             else:
                 inventory_list = []
-        print("Cargando Partida")
-        return{"name": "Orenday", "gold": gold, "inventory": inventory_list}
+        print("LOAD MATCH")
+        return {"name": "Orenday", "gold": gold, "inventory": inventory_list}
     except (FileNotFoundError, ValueError, IndexError):
-        print("PARTIDA NUEVA")
-        return{"name": "Orenday", "gold": 100, "inventory": []}
+        print("NEW MATCH")
+        return {"name": "Orenday", "gold": 100, "inventory": []}
 
 def save_game(player):
     with open("save.txt", "w") as save:
         inventory = ", ".join(player["inventory"])
-        save.write(f"GOLD: {player['gold']} \nInventory: {inventory}")
+        save.write(f"GOLD: {player['gold']}\nInventory: {inventory}")
 
 def buy(player, item):
     if item in shop:
@@ -59,11 +59,11 @@ while True:
         for item_name, price in shop.items():
             print(f"{item_name}: {price}")
     elif option == "sell":
-        item = input(f"which item you have {player['inventory']} in you inventary: ").lower()
+        item = input(f"which item {player['inventory']} do you want to sell? ").lower()
         sell(player, item)
     elif option == "exit":
         save_game(player)
-        print("SALISTE DEL JUEGO")
+        print("EXIT TO THE GAME")
         break
     else:
         print("Invalid option")
