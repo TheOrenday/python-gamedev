@@ -37,7 +37,7 @@ def buy(player, item):
 def sell(player, item):
     if item in player["inventory"]:
         price = shop[item]
-        player["gold"] = player["gold"] + price
+        player["gold"] = player["gold"] + (price//2)
         player["inventory"].remove(item)
         print(f"You sold {item}")
     else:

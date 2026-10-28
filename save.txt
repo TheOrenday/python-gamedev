@@ -1,2 +1,2 @@
-GOLD: 40 
+GOLD: 25 
 Inventory: shield
