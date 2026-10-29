@@ -1,5 +1,5 @@
-player = {"name": "Orenday", "gold": 100, "inventory": []}
 shop = {"potion": 30, "sword": 80, "shield": 60}
+sell_prices = {"potion":shop["potion"]//2, "sword":shop["sword"] *3//4, "shield":shop["shield"]//2}
 
 def load_game():
     try:
@@ -11,10 +11,10 @@ def load_game():
                 inventory_list = inventory_text.split(", ")
             else:
                 inventory_list = []
-        print("LOAD MATCH")
+        print("LOAD GAME")
         return {"name": "Orenday", "gold": gold, "inventory": inventory_list}
     except (FileNotFoundError, ValueError, IndexError):
-        print("NEW MATCH")
+        print("NEW GAME")
         return {"name": "Orenday", "gold": 100, "inventory": []}
 
 def save_game(player):
@@ -36,14 +36,12 @@ def buy(player, item):
 
 def sell(player, item):
     if item in player["inventory"]:
-        price = shop[item]
-        player["gold"] = player["gold"] + (price//2)
+        price = sell_prices[item]
+        player["gold"] = player["gold"] + price
         player["inventory"].remove(item)
         print(f"You sold {item}")
     else:
-        print(f"You dont have {item}")
-        
-
+        print(f"You don't have {item}")
 player = load_game()
 
 while True:
@@ -59,11 +57,11 @@ while True:
         for item_name, price in shop.items():
             print(f"{item_name}: {price}")
     elif option == "sell":
-        item = input(f"which item {player['inventory']} do you want to sell? ").lower()
+        item = input(f"Which item {player['inventory']} do you want to sell? ").lower()
         sell(player, item)
     elif option == "exit":
         save_game(player)
-        print("EXIT TO THE GAME")
+        print("GAME SAVED")
         break
     else:
         print("Invalid option")
