@@ -1,47 +1,5 @@
-shop = {"potion": 30, "sword": 80, "shield": 60}
-sell_prices = {"potion":shop["potion"]//2, "sword":shop["sword"] *3//4, "shield":shop["shield"]//2}
-
-def load_game():
-    try:
-        with open("save.txt", "r") as save:
-            lines = save.readlines()
-            gold = int(lines[0].split(": ")[1])
-            inventory_text = lines[1].split(": ")[1].strip()
-            if inventory_text:
-                inventory_list = inventory_text.split(", ")
-            else:
-                inventory_list = []
-        print("LOAD GAME")
-        return {"name": "Orenday", "gold": gold, "inventory": inventory_list}
-    except (FileNotFoundError, ValueError, IndexError):
-        print("NEW GAME")
-        return {"name": "Orenday", "gold": 100, "inventory": []}
-
-def save_game(player):
-    with open("save.txt", "w") as save:
-        inventory = ", ".join(player["inventory"])
-        save.write(f"GOLD: {player['gold']}\nInventory: {inventory}")
-
-def buy(player, item):
-    if item in shop:
-        price = shop[item]
-        if player["gold"] >= price:
-            player["gold"] = player["gold"] - price
-            player["inventory"].append(item)
-            print(f"You bought {item}")
-        else:
-            print(f"Not enough gold. {item} costs {price} and you have {player['gold']}")
-    else:
-        print(f"{item} does not exist in the shop")
-
-def sell(player, item):
-    if item in player["inventory"]:
-        price = sell_prices[item]
-        player["gold"] = player["gold"] + price
-        player["inventory"].remove(item)
-        print(f"You sold {item}")
-    else:
-        print(f"You don't have {item}")
+from buy_and_sell import buy, sell, shop
+from saved_system import load_game, save_game
 player = load_game()
 
 while True:
